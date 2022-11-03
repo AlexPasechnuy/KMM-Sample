@@ -7,7 +7,7 @@ class DataArticleToDomainMapper {
 
     fun mapDataToDomain(article: DataArticle): Article {
         return Article(
-            source = article.source,
+            source = article.source.name ?: "Unknown",
             author = article.author,
             title = article.title,
             description = article.description,

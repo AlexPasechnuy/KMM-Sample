@@ -10,9 +10,10 @@ class ArticlesRepositoryImpl : ArticlesRepository {
     private val dataSource = RemoteArticlesDatasource()
     private val dataArticleMapper = DataArticleToDomainMapper();
 
-    override suspend fun getAll(): List<Article> =
-        dataSource
+    override suspend fun getAll(): List<Article> {
+        val articles = dataSource
             .getAll()
             .map { dataArticleMapper.mapDataToDomain(it) }
-
+        return articles
+    }
 }
