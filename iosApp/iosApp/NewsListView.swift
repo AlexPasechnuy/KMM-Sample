@@ -42,7 +42,20 @@ extension NewsListView {
         }
 
         init() {
-            presenter = NewsListPresenter()
+            // TODO("DI")
+            let articlesRepository = ArticlesRepositoryImpl(
+                localArticlesDatasource : LocalArticlesDatasource(
+                    database : Database(databaseDriverFactory : DatabaseDriverFactory())
+                ),
+                remoteArticlesDatasource : RemoteArticlesDatasource(),
+                dataArticleMapper : DataArticleToDomainMapper()
+            )
+            presenter = LocalNewsListPresenter(
+                getLocalArticlesInteractor : GetLocalArticlesInteractor(
+                    articlesRepository :articlesRepository
+                ),
+                fetchArticlesInteractor: FetchArticlesInteractor(articlesRepository : articlesRepository)
+            )
             presenter?.attach(view: self)
             presenter?.showNews()
         }

@@ -2,17 +2,16 @@ package com.pasichnyi.cleanarchitecturekmm.UI.presenter
 
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListPresenterContract
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListViewContract
-import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetAllArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetNetworkArticlesInteractor
 import kotlinx.coroutines.launch
 
-class NewsListPresenter : BasePresenter<NewsListViewContract>(), NewsListPresenterContract {
-
-    // TODO("Add DI")
-    private val getAllArticlesInteractor = GetAllArticlesInteractor()
+class RemoteNewsListPresenter(
+    private val getNetworkArticlesInteractor: GetNetworkArticlesInteractor,
+) : BasePresenter<NewsListViewContract>(), NewsListPresenterContract {
 
     override fun showNews() {
         launch {
-            val list = getAllArticlesInteractor()
+            val list = getNetworkArticlesInteractor()
             view?.displayNewsList(list)
         }
     }

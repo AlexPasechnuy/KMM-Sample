@@ -16,8 +16,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListPresenterContract
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListViewContract
-import com.pasichnyi.cleanarchitecturekmm.UI.presenter.NewsListPresenter
+import com.pasichnyi.cleanarchitecturekmm.UI.presenter.LocalNewsListPresenter
+import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.LocalArticlesDatasource
+import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.cache.Database
+import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.cache.DatabaseDriverFactory
+import com.pasichnyi.cleanarchitecturekmm.data.datasource.remote.RemoteArticlesDatasource
+import com.pasichnyi.cleanarchitecturekmm.data.repository.ArticlesRepositoryImpl
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.FetchArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetLocalArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.mapper.DataArticleToDomainMapper
 
 class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterContract>(),
     NewsListViewContract {
@@ -31,7 +39,18 @@ class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterCon
     }
 
     override fun initPresenter(): NewsListPresenterContract {
-        return NewsListPresenter()
+        // TODO("DI")
+        val articlesRepository = ArticlesRepositoryImpl(
+            localArticlesDatasource = LocalArticlesDatasource(
+                database = Database(databaseDriverFactory = DatabaseDriverFactory(context = this))
+            ),
+            remoteArticlesDatasource = RemoteArticlesDatasource(),
+            dataArticleMapper = DataArticleToDomainMapper(),
+        )
+        return LocalNewsListPresenter(
+            getLocalArticlesInteractor = GetLocalArticlesInteractor(articlesRepository),
+            fetchArticlesInteractor = FetchArticlesInteractor(articlesRepository),
+        )
     }
 
     override fun displayNewsList(news: List<Article>) {

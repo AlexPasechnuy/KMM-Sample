@@ -4,5 +4,9 @@ import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 
 interface ArticlesRepository {
 
-    suspend fun getAll(): List<Article>;
+    suspend fun getAllRemote(): List<Article>
+    suspend fun getAllLocal(): List<Article>
+    suspend fun fetchArticles()
+    suspend fun cacheArticles(articles: List<Article>)
+    suspend fun clearLocalDatabase()
 }

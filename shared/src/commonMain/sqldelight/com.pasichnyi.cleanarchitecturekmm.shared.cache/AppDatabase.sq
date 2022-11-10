@@ -1,0 +1,37 @@
+CREATE TABLE Article (
+    sourceName    TEXT  NOT NULL,
+    author        TEXT,
+    title         TEXT     NOT NULL,
+    description   TEXT,
+    url           TEXT     NOT NULL,
+    urlToImage    TEXT,
+    publishTime   TEXT,
+    content       TEXT
+);
+
+CREATE TABLE Source (
+    name   TEXT PRIMARY KEY NOT NULL
+);
+
+insertArticle:
+INSERT INTO Article(sourceName, author, title, description, url, urlToImage, publishTime, content)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+
+insertSource:
+INSERT INTO Source(name)
+VALUES(?);
+
+removeAllArticles:
+DELETE FROM Article;
+
+removeAllSources:
+DELETE FROM Source;
+
+selectSourceByName:
+SELECT * FROM Source
+WHERE name = ?;
+
+selectAllArticlesInfo:
+SELECT Article.*, Source.*
+FROM Article
+LEFT JOIN Source ON Source.name == Article.sourceName;
