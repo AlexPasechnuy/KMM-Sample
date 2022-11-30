@@ -17,18 +17,16 @@ import androidx.compose.ui.unit.dp
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListPresenterContract
 import com.pasichnyi.cleanarchitecturekmm.UI.contract.NewsListViewContract
 import com.pasichnyi.cleanarchitecturekmm.UI.presenter.LocalNewsListPresenter
-import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.LocalArticlesDatasource
-import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.cache.Database
-import com.pasichnyi.cleanarchitecturekmm.data.datasource.local.articlesDB.cache.DatabaseDriverFactory
-import com.pasichnyi.cleanarchitecturekmm.data.datasource.remote.RemoteArticlesDatasource
-import com.pasichnyi.cleanarchitecturekmm.data.repository.ArticlesRepositoryImpl
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.FetchArticlesInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetLocalArticlesInteractor
-import com.pasichnyi.cleanarchitecturekmm.domain.mapper.DataArticleToDomainMapper
+import org.koin.android.ext.android.inject
 
 class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterContract>(),
     NewsListViewContract {
+
+    private val getLocalArticlesInteractor : GetLocalArticlesInteractor by inject()
+    private val fetchArticlesInteractor : FetchArticlesInteractor by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +37,9 @@ class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterCon
     }
 
     override fun initPresenter(): NewsListPresenterContract {
-        // TODO("DI")
-        val articlesRepository = ArticlesRepositoryImpl(
-            localArticlesDatasource = LocalArticlesDatasource(
-                database = Database(databaseDriverFactory = DatabaseDriverFactory(context = this))
-            ),
-            remoteArticlesDatasource = RemoteArticlesDatasource(),
-            dataArticleMapper = DataArticleToDomainMapper(),
-        )
         return LocalNewsListPresenter(
-            getLocalArticlesInteractor = GetLocalArticlesInteractor(articlesRepository),
-            fetchArticlesInteractor = FetchArticlesInteractor(articlesRepository),
+            getLocalArticlesInteractor = getLocalArticlesInteractor,
+            fetchArticlesInteractor = fetchArticlesInteractor,
         )
     }
 

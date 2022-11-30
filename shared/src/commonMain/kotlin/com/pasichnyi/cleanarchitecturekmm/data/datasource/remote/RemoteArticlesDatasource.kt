@@ -26,9 +26,7 @@ class RemoteArticlesDatasource {
     suspend fun getAll(): List<DataArticle> {
         val response =
             httpClient.get("https://newsapi.org/v2/top-headlines?language=en&apiKey=01dfa608af1248fa9569714e81fdd998")
-        print("")
         val responseBody: ArticlesApiResponse = response.body()
-        val list = responseBody.articles
-        return list
+        return responseBody.articles
     }
 }

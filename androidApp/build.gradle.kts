@@ -31,6 +31,8 @@ android {
     }
 }
 
+val koinAndroidVersion = "3.3.0"
+
 dependencies {
     implementation(project(":shared"))
     implementation("androidx.compose.ui:ui:1.3.0")
@@ -40,4 +42,5 @@ dependencies {
     implementation("androidx.compose.material:material:1.3.0")
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation ("io.insert-koin:koin-android:$koinAndroidVersion")
 }

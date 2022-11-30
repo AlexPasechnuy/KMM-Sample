@@ -6,7 +6,6 @@ struct NewsListView: View {
     
     var body: some View {
         List {
-            // ID is title - BAD!
             ForEach(viewModel.articles, id: \.title) { article in
                 NewsItemCardView(article: article)
             }
@@ -42,19 +41,11 @@ extension NewsListView {
         }
 
         init() {
-            // TODO("DI")
-            let articlesRepository = ArticlesRepositoryImpl(
-                localArticlesDatasource : LocalArticlesDatasource(
-                    database : Database(databaseDriverFactory : DatabaseDriverFactory())
-                ),
-                remoteArticlesDatasource : RemoteArticlesDatasource(),
-                dataArticleMapper : DataArticleToDomainMapper()
-            )
+            let getLocalArticlesInteractor = DIHelperIOS().getLocalArticlesInteractor;
+            let fetchArticlesInteractor = DIHelperIOS().fetchArticlesInteractor;
             presenter = LocalNewsListPresenter(
-                getLocalArticlesInteractor : GetLocalArticlesInteractor(
-                    articlesRepository :articlesRepository
-                ),
-                fetchArticlesInteractor: FetchArticlesInteractor(articlesRepository : articlesRepository)
+                getLocalArticlesInteractor : getLocalArticlesInteractor,
+                fetchArticlesInteractor: fetchArticlesInteractor
             )
             presenter?.attach(view: self)
             presenter?.showNews()
