@@ -23,11 +23,12 @@ abstract class BaseFragment<V : BaseViewContract, P : BasePresenterContract<V>> 
         super.onDetach()
     }
 
-    override fun showUnexpectedError() {
+    override fun showError(title: String?, content: String?) {
         AlertDialog
             .Builder(context)
-            .setMessage("R.string.unexpected_error_message")
-            .setPositiveButton("R.string.ok", null)
+            .setTitle(title ?: "Error")
+            .setMessage(content ?: "Unexpected error occurred")
+            .setPositiveButton("ok", null)
             .show()
     }
 

@@ -7,8 +7,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class DIHelperIOS : KoinComponent {
-    val articlesRepository : ArticlesRepositoryImpl by inject()
+    val articlesRepository: ArticlesRepositoryImpl by inject()
 
-    val getLocalArticlesInteractor : GetLocalArticlesInteractor by inject()
-    val fetchArticlesInteractor : FetchArticlesInteractor by inject()
+    val getLocalArticlesInteractor: GetLocalArticlesInteractor by inject()
+    val fetchArticlesInteractor: FetchArticlesInteractor by inject()
 }

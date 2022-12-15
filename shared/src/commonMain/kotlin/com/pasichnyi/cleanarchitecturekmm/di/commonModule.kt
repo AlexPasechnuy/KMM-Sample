@@ -33,16 +33,3 @@ fun commonModule(): Module = module {
     single { GetLocalArticlesInteractor(get()) }
     single { GetNetworkArticlesInteractor(get()) }
 }
-
-
-//val articlesRepository = ArticlesRepositoryImpl(
-//    localArticlesDatasource = LocalArticlesDatasource(
-//        database = Database(databaseDriverFactory = DatabaseDriverFactory(context = this))
-//    ),
-//    remoteArticlesDatasource = RemoteArticlesDatasource(),
-//    dataArticleMapper = DataArticleToDomainMapper(),
-//)
-//return LocalNewsListPresenter(
-//getLocalArticlesInteractor = GetLocalArticlesInteractor(articlesRepository),
-//fetchArticlesInteractor = FetchArticlesInteractor(articlesRepository),
-//)

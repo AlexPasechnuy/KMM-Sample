@@ -13,12 +13,12 @@ open class BasePresenter<V : BaseViewContract> : CoroutineScope, BasePresenterCo
         private set
 
     override val coroutineContext = Dispatchers.Main +
-            CoroutineExceptionHandler { _, _ ->
-                showError()
+            CoroutineExceptionHandler { _, throwable ->
+                showError(throwable)
             } + SupervisorJob()
 
-    override fun showError() {
-        view?.showUnexpectedError()
+    override fun showError(throwable: Throwable?) {
+        view?.showError(content = throwable?.message)
     }
 
     override fun attach(view: V) {

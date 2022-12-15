@@ -49,9 +49,6 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
-                /////////// TODO("Is it needed?")
-                implementation ("io.insert-koin:koin-android:$koinAndroidVersion")
-
             }
         }
         val androidTest by getting

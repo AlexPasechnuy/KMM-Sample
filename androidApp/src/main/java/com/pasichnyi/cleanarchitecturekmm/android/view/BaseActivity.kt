@@ -24,10 +24,11 @@ abstract class BaseActivity<V : BaseViewContract, P : BasePresenterContract<V>> 
         super.onDestroy()
     }
 
-    override fun showUnexpectedError() {
+    override fun showError(title: String?, content: String?) {
         AlertDialog
             .Builder(this)
-            .setMessage("Error")
+            .setTitle(title ?: "Error")
+            .setMessage(content ?: "Unexpected error occurred")
             .setPositiveButton("ok", null)
             .show()
     }

@@ -2,7 +2,7 @@ package com.pasichnyi.cleanarchitecturekmm.UI.contract
 
 interface BaseViewContract {
 
-    fun showUnexpectedError()
+    fun showError(title: String? = null, content: String? = null)
 }
 
 interface BasePresenterContract<V : BaseViewContract> {
@@ -11,5 +11,5 @@ interface BasePresenterContract<V : BaseViewContract> {
 
     fun detach()
 
-    fun showError()
+    fun showError(throwable: Throwable?)
 }

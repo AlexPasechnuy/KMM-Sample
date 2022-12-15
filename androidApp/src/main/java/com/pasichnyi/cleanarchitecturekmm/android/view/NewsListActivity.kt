@@ -64,16 +64,6 @@ class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterCon
 
     @Composable
     fun ArticleCard(article: Article) {
-//        Row(modifier = Modifier.padding(all = 8.dp)) {
-//            Image(
-//                painter = painterResource(R.drawable.profile_picture),
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .size(40.dp)
-//                    .clip(CircleShape)
-//                    .border(1.5.dp, MaterialTheme.colors.secondary, CircleShape)
-//            )
-//            Spacer(modifier = Modifier.width(8.dp))
         Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
 
             Column {
@@ -94,6 +84,5 @@ class NewsListActivity : BaseActivity<NewsListViewContract, NewsListPresenterCon
             }
         }
         Spacer(modifier = Modifier.height(4.dp))
-//        }
     }
 }
