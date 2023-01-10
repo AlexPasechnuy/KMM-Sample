@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.7.20"
     id("com.squareup.sqldelight")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
@@ -25,9 +26,8 @@ kotlin {
 
     val coroutinesVersion = "1.6.4"
     val ktorVersion = "2.1.2"
-    val sqlDelightVersion = "1.5.3"
+    val sqlDelightVersion = project.property("sqlDelightVersion")
     val koinVersion = "3.2.0"
-    val koinAndroidVersion = "3.3.0"
 
     sourceSets {
         val commonMain by getting {
@@ -38,6 +38,10 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
                 implementation("io.insert-koin:koin-core:$koinVersion")
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.ui)
             }
         }
         val commonTest by getting {
