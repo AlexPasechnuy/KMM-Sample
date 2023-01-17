@@ -1,4 +1,4 @@
-package com.pasichnyi.cleanarchitecturekmm.presentation.NewsList
+package com.pasichnyi.cleanarchitecturekmm.presentation.newslist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

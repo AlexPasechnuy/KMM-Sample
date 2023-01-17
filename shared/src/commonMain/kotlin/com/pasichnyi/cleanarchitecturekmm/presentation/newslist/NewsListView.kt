@@ -1,7 +1,9 @@
-package com.pasichnyi.cleanarchitecturekmm.presentation.NewsList
+package com.pasichnyi.cleanarchitecturekmm.presentation.newslist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,30 +17,38 @@ import androidx.compose.ui.unit.dp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 
 @Composable
-internal fun openArticlesList() {
-    NewsListView().openArticlesList()
+internal fun openArticlesList(onItemClick: (Article) -> Unit) {
+    NewsListView().openArticlesList(onItemClick)
 }
 
 internal class NewsListView {
 
     @Composable
-    fun openArticlesList() {
+    fun openArticlesList(onItemClick: (Article) -> Unit) {
         val model = remember { NewsListStore() }
         val state = model.state
 
-        ArticlesList(state.items)
+        ArticlesList(state.items, onItemClick)
     }
 
     @Composable
-    internal fun ArticlesList(articles: List<Article>) {
+    internal fun ArticlesList(articles: List<Article>, onItemClick: (Article) -> Unit) {
         LazyColumn {
-            articles.map { item { ArticleCard(it) } }
+            articles.map { item { ArticleCard(it, onItemClick) } }
         }
     }
 
     @Composable
-    private fun ArticleCard(article: Article) {
-        Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
+    private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
+        Surface(
+            shape = MaterialTheme.shapes.medium,
+            elevation = 1.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onItemClick(article)
+                },
+        ) {
 
             Column {
 

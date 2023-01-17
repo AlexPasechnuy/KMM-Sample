@@ -28,6 +28,7 @@ kotlin {
     val ktorVersion = "2.1.2"
     val sqlDelightVersion = project.property("sqlDelightVersion")
     val koinVersion = "3.2.0"
+    val precomposeVersion = "1.3.13"
 
     sourceSets {
         val commonMain by getting {
