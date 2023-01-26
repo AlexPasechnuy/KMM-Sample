@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
-import com.pasichnyi.cleanarchitecturekmm.presentation.RootView
+import com.pasichnyi.cleanarchitecturekmm.presentation.rootView.RootView
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController =

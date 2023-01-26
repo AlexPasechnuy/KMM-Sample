@@ -17,36 +17,36 @@ import androidx.compose.ui.unit.dp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 
 @Composable
-internal fun openArticlesList(onItemClick: (Article) -> Unit) {
-    NewsListView().openArticlesList(onItemClick)
+internal fun openArticlesList() {
+    NewsListView().openArticlesList()
 }
 
 internal class NewsListView {
 
     @Composable
-    fun openArticlesList(onItemClick: (Article) -> Unit) {
+    fun openArticlesList() {
         val model = remember { NewsListStore() }
         val state = model.state
 
-        ArticlesList(state.items, onItemClick)
+        ArticlesList(state.items)
     }
 
     @Composable
-    internal fun ArticlesList(articles: List<Article>, onItemClick: (Article) -> Unit) {
+    internal fun ArticlesList(articles: List<Article>) {
         LazyColumn {
-            articles.map { item { ArticleCard(it, onItemClick) } }
+            articles.map { item { ArticleCard(it) } }
         }
     }
 
     @Composable
-    private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
+    private fun ArticleCard(article: Article) {
         Surface(
             shape = MaterialTheme.shapes.medium,
             elevation = 1.dp,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    onItemClick(article)
+                    // TODO("Add onClick")
                 },
         ) {
 
