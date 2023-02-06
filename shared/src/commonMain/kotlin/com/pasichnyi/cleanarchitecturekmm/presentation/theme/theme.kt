@@ -11,9 +11,9 @@ import com.pasichnyi.cleanarchitecturekmm.presentation.rootView.DarkMode
 internal fun Theme(content: @Composable () -> Unit) {
     val orange = Color(0xFFFF8C00)
     val colors = if (DarkMode.current.value) {
-        darkColors(primary = orange, surface = orange, onPrimary = Color.White)
+        darkColors()
     } else {
-        lightColors(primary = orange)
+        lightColors()
     }
 
     MaterialTheme(

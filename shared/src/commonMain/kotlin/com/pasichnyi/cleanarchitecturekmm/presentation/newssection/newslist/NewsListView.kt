@@ -1,7 +1,9 @@
 package com.pasichnyi.cleanarchitecturekmm.presentation.newssection.newslist
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +39,10 @@ internal class NewsListView {
         articles: List<Article>,
         onItemClick: (Article) -> Unit
     ) {
-        LazyColumn {
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
             articles.map { item { ArticleCard(it, onItemClick) } }
         }
     }
@@ -46,14 +51,19 @@ internal class NewsListView {
     private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
         Surface(
             shape = MaterialTheme.shapes.medium,
-            elevation = 1.dp,
+            elevation = 2.dp,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
                     onItemClick(article)
                 },
         ) {
-            Column {
+            Column(
+                modifier = Modifier.padding(PaddingValues(horizontal = 4.dp, vertical = 4.dp))
+            ){
+
+                Spacer(modifier = Modifier.height(4.dp))
+
                 Text(
                     text = article.author ?: "Unknown author",
                     color = MaterialTheme.colors.secondaryVariant,
@@ -67,8 +77,9 @@ internal class NewsListView {
                     modifier = Modifier.padding(all = 4.dp),
                     style = MaterialTheme.typography.body2
                 )
+
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
-        Spacer(modifier = Modifier.height(4.dp))
     }
 }
