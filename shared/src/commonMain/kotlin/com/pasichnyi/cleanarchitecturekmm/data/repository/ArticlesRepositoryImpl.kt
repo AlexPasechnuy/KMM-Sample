@@ -37,4 +37,8 @@ class ArticlesRepositoryImpl(
 
     override suspend fun clearLocalDatabase() =
         localArticlesDatasource.clearDatabase()
+
+    override suspend fun getArticlesByUrl(url: String): List<Article> =
+        localArticlesDatasource.getArticlesByUrl(url).map { dataArticleMapper.mapDataToDomain(it) }
+
 }

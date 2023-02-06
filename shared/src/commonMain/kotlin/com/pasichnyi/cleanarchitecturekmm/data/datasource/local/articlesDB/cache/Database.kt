@@ -58,6 +58,10 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         }
     }
 
+    internal fun getArticleByUrl(url: String) : List<DataArticle>{
+        return dbQuery.selectArticleByUrl(url = url, mapper = ::mapArticlesSelecting).executeAsList()
+    }
+
     private fun insertSource(source: DataArticleSource) {
         dbQuery.insertSource(
             name = source.name,

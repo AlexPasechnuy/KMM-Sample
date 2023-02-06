@@ -1,4 +1,4 @@
-package com.pasichnyi.cleanarchitecturekmm.presentation.articledetails
+package com.pasichnyi.cleanarchitecturekmm.presentation.newssection.articledetails
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
@@ -17,22 +17,23 @@ import androidx.compose.ui.unit.sp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 
 @Composable
-internal fun openArticleDetails(article: Article, onBack: () -> Unit) {
-    ArticleDetailsView().openArticleDetails(article, onBack)
+internal fun openArticleDetails(url: String) {
+    ArticleDetailsView().openArticleDetails(url)
 }
 
 internal class ArticleDetailsView {
 
     @Composable
-    fun openArticleDetails(article: Article, onBack: () -> Unit) {
-        val model = remember { ArticleDetailsStore(article) }
+    fun openArticleDetails(url: String) {
+        val model = remember { ArticleDetailsStore(url) }
         val state = model.state
 
-        ArticleDetails(state.item, onBack)
+
+        ArticleDetails(state.item)
     }
 
     @Composable
-    internal fun ArticleDetails(article: Article, onBack: () -> Unit) {
+    internal fun ArticleDetails(article: Article) {
 
         Surface(color = MaterialTheme.colors.primary) {
             Column {
@@ -46,12 +47,6 @@ internal class ArticleDetailsView {
                     fontSize = 20.sp,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                Button(
-                    onClick = onBack,
-                    border = BorderStroke(1.dp, Color.Black)
-                ) {
-                    Text(text = "Back")
-                }
             }
         }
     }

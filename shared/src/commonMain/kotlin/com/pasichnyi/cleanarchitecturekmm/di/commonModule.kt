@@ -8,6 +8,7 @@ import com.pasichnyi.cleanarchitecturekmm.data.repository.ArticlesRepositoryImpl
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.CacheArticlesInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.ClearDbInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.FetchArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetArticlesByUrlInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetLocalArticlesInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetNetworkArticlesInteractor
 import com.pasichnyi.cleanarchitecturekmm.domain.mapper.DataArticleToDomainMapper
@@ -32,4 +33,5 @@ fun commonModule(): Module = module {
     single { FetchArticlesInteractor(get()) }
     single { GetLocalArticlesInteractor(get()) }
     single { GetNetworkArticlesInteractor(get()) }
+    single { GetArticlesByUrlInteractor(get()) }
 }

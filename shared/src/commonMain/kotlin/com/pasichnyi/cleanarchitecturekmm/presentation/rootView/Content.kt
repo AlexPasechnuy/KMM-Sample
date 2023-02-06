@@ -27,7 +27,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
-import com.pasichnyi.cleanarchitecturekmm.presentation.newslist.openArticlesList
+import com.pasichnyi.cleanarchitecturekmm.presentation.newssection.NewsSection
+import com.pasichnyi.cleanarchitecturekmm.presentation.newssection.newslist.openArticlesList
 import com.pasichnyi.cleanarchitecturekmm.presentation.settings.Settings
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.navigation.NavHost
@@ -99,7 +100,7 @@ internal fun Content() {
                         )
                     ) {
                         when (screen) {
-                            Screens.News -> openArticlesList()
+                            Screens.News -> NewsSection()
                             Screens.Settings -> Settings()
                         }
                     }

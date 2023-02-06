@@ -35,3 +35,9 @@ selectAllArticlesInfo:
 SELECT Article.*, Source.*
 FROM Article
 LEFT JOIN Source ON Source.name == Article.sourceName;
+
+selectArticleByUrl:
+SELECT Article.*, Source.*
+FROM Article
+LEFT JOIN Source ON Source.name == Article.sourceName
+WHERE url = ?;

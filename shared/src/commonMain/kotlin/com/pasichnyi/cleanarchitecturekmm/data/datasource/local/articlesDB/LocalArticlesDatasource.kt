@@ -10,4 +10,6 @@ class LocalArticlesDatasource(private val database: Database) {
     fun clearDatabase() = database.clearDatabase()
 
     fun insertArticles(articles: List<DataArticle>) = database.insertArticles(articles)
+
+    fun getArticlesByUrl(url: String) = database.getArticleByUrl(url)
 }

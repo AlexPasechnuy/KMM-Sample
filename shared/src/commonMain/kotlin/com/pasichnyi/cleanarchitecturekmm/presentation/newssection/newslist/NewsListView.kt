@@ -1,4 +1,4 @@
-package com.pasichnyi.cleanarchitecturekmm.presentation.newslist
+package com.pasichnyi.cleanarchitecturekmm.presentation.newssection.newslist
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -17,41 +17,43 @@ import androidx.compose.ui.unit.dp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
 
 @Composable
-internal fun openArticlesList() {
-    NewsListView().openArticlesList()
+internal fun openArticlesList(onItemClick: (Article) -> Unit) {
+    NewsListView().openArticlesList(onItemClick)
 }
 
 internal class NewsListView {
 
     @Composable
-    fun openArticlesList() {
+    fun openArticlesList(onItemClick: (Article) -> Unit) {
+
         val model = remember { NewsListStore() }
         val state = model.state
-
-        ArticlesList(state.items)
+        ArticlesList(state.items, onItemClick)
     }
 
+
     @Composable
-    internal fun ArticlesList(articles: List<Article>) {
+    internal fun ArticlesList(
+        articles: List<Article>,
+        onItemClick: (Article) -> Unit
+    ) {
         LazyColumn {
-            articles.map { item { ArticleCard(it) } }
+            articles.map { item { ArticleCard(it, onItemClick) } }
         }
     }
 
     @Composable
-    private fun ArticleCard(article: Article) {
+    private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
         Surface(
             shape = MaterialTheme.shapes.medium,
             elevation = 1.dp,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    // TODO("Add onClick")
+                    onItemClick(article)
                 },
         ) {
-
             Column {
-
                 Text(
                     text = article.author ?: "Unknown author",
                     color = MaterialTheme.colors.secondaryVariant,
@@ -70,4 +72,3 @@ internal class NewsListView {
         Spacer(modifier = Modifier.height(4.dp))
     }
 }
-
