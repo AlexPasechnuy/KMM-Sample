@@ -7,7 +7,7 @@ data class Article(
     val description: String?,
     val url: String,
     val urlToImage: String?,
-    val publishTime: String?,
+    val publishedAt: String?,
     val content: String?,
 ) {
     companion object {
@@ -19,7 +19,7 @@ data class Article(
                 description = "Description 1",
                 url = "",
                 urlToImage = "",
-                publishTime = "today",
+                publishedAt = "today",
                 content = "Lorem ipsum ... 1"
             ),
             Article(
@@ -29,7 +29,7 @@ data class Article(
                 description = "Description 2",
                 url = "",
                 urlToImage = "",
-                publishTime = "today",
+                publishedAt = "today",
                 content = "Lorem ipsum ... 2"
             ),
             Article(
@@ -39,7 +39,7 @@ data class Article(
                 description = "Description 3",
                 url = "",
                 urlToImage = "",
-                publishTime = "today",
+                publishedAt = "today",
                 content = "Lorem ipsum ... 3"
             )
         )

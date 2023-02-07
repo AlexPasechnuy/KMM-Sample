@@ -14,7 +14,7 @@ class DataArticleToDomainMapper {
         url = article.url,
         urlToImage = article.urlToImage,
         content = article.content,
-        publishTime = article.publishTime,
+        publishedAt = article.publishedAt,
     )
 
     fun mapDomainToData(article: Article) = DataArticle(
@@ -24,7 +24,7 @@ class DataArticleToDomainMapper {
         description = article.description,
         url = article.url,
         urlToImage = article.urlToImage,
-        publishTime = article.publishTime,
+        publishedAt = article.publishedAt,
         content = article.content
     )
 }

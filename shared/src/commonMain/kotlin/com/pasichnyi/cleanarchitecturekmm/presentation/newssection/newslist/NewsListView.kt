@@ -40,13 +40,12 @@ internal class NewsListView {
         val state = model.state
         Column {
             if (!state.isOnline) {
-                //Text("You are offline")
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(40.dp)
                         .background(
-                            Color.Red
+                            MaterialTheme.colors.error
                         ),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -112,11 +111,19 @@ internal class NewsListView {
 
                     Spacer(modifier = Modifier.height(4.dp))
 
-                    Text(
-                        text = article.author ?: "Unknown author",
-                        color = MaterialTheme.colors.secondaryVariant,
-                        style = MaterialTheme.typography.subtitle2
-                    )
+                    Row {
+                        Text(
+                            text = article.author ?: "Unknown author",
+                            color = MaterialTheme.colors.secondaryVariant,
+                            style = MaterialTheme.typography.subtitle2
+                        )
+                        Spacer(Modifier.weight(1f))
+                        Text(
+                            text = article.publishedAt ?: "Publish time unknown",
+                            color = MaterialTheme.colors.secondaryVariant,
+                            style = MaterialTheme.typography.subtitle2
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(4.dp))
 

@@ -40,7 +40,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
             description = description,
             url = url,
             urlToImage = urlToImage,
-            publishTime = publishTime,
+            publishedAt = publishTime,
             content = content,
         )
     }
@@ -76,7 +76,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
             description = article.description,
             url = article.url,
             urlToImage = article.urlToImage,
-            publishTime = article.publishTime,
+            publishTime = article.publishedAt,
             content = article.content
         )
     }

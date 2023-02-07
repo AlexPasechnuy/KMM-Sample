@@ -10,6 +10,6 @@ data class DataArticle(
     val description: String? = null,
     val url: String,
     val urlToImage: String? = null,
-    val publishTime: String? = null,
+    val publishedAt: String? = null,
     val content: String? = null,
 )

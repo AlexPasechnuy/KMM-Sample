@@ -29,7 +29,7 @@ class RemoteArticlesDatasource {
     suspend fun getAll(): List<DataArticle> {
         return try {
             val response =
-                httpClient.get("https://newsapi.org/v2/top-headlines?language=en&apiKey=01dfa608af1248fa9569714e81fdd998")
+                httpClient.get("https://newsapi.org/v2/top-headlines?language=en&sortBy=publishedAt&apiKey=01dfa608af1248fa9569714e81fdd998")
             val responseBody: ArticlesApiResponse = response.body()
             responseBody.articles
         } catch (ex: Exception) {

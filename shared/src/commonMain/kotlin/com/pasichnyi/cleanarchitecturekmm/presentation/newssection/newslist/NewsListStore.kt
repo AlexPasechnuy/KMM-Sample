@@ -46,6 +46,6 @@ internal class NewsListStore : KoinComponent {
 
     data class NewsListState(
         val items: List<Article> = emptyList(),
-        var isOnline: Boolean = false,
+        var isOnline: Boolean = true,
     )
 }

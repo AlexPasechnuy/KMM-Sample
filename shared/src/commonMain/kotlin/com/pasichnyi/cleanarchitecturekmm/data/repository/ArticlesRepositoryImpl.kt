@@ -22,7 +22,9 @@ class ArticlesRepositoryImpl(
 
 
     override suspend fun fetchArticles() {
-        cacheArticles(getAllRemote())
+        val remoteArticles = getAllRemote()
+        clearLocalDatabase()
+        cacheArticles(remoteArticles)
     }
 
     override suspend fun cacheArticles(articles: List<Article>) {
