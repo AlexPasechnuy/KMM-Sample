@@ -3,11 +3,11 @@ package com.pasichnyi.cleanarchitecturekmm.presentation.newssection.articledetai
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
+import com.pasichnyi.cleanarchitecturekmm.presentation.widgets.AsyncImage
 
 @Composable
 internal fun openArticleDetails(url: String) {
@@ -40,6 +41,13 @@ internal class ArticleDetailsView {
             Column(
                 modifier = Modifier.padding(PaddingValues(horizontal = 8.dp, vertical = 8.dp))
             ) {
+                article.urlToImage?.let {
+                    AsyncImage(
+                        url = it,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = article.title,
                     fontSize = 30.sp,
