@@ -1,5 +1,9 @@
 package com.pasichnyi.cleanarchitecturekmm.domain.entity
 
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
+
+@Parcelize
 data class Article(
     val source: String,
     val author: String?,
@@ -9,7 +13,7 @@ data class Article(
     val urlToImage: String?,
     val publishedAt: String?,
     val content: String?,
-) {
+) : Parcelable {
     companion object {
         val sampleData = listOf(
             Article(

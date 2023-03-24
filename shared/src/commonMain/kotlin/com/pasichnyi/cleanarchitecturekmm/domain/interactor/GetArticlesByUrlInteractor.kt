@@ -7,6 +7,6 @@ class GetArticlesByUrlInteractor(
     private val articlesRepository: ArticlesRepository
 ) {
 
-    suspend operator fun invoke(url: String) : List<Article> =
+    suspend operator fun invoke(url: String): List<Article> =
         articlesRepository.getArticlesByUrl(url)
 }

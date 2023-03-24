@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.7.20"
     id("com.squareup.sqldelight")
     id("org.jetbrains.compose")
+    id ("kotlin-parcelize")
 }
 
 kotlin {
@@ -44,6 +45,8 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.ui)
                 api("moe.tlaster:precompose:$precomposeVersion")
+                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:1.0.0-beta-04-native-compose")
+                implementation("com.arkivanov.decompose:decompose:1.0.0-beta-04-native-compose")
             }
         }
         val commonTest by getting {
