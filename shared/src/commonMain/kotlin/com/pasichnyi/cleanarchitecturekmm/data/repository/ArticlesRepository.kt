@@ -9,5 +9,5 @@ interface ArticlesRepository {
     suspend fun fetchArticles()
     suspend fun cacheArticles(articles: List<Article>)
     suspend fun clearLocalDatabase()
-    suspend fun getArticlesByUrl(url: String) :  List<Article>
+    suspend fun getArticlesByUrl(url: String): List<Article>
 }

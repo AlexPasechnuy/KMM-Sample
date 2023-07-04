@@ -1,17 +1,28 @@
 package com.pasichnyi.cleanarchitecturekmm.android.view
 
 import android.os.Bundle
-import com.pasichnyi.cleanarchitecturekmm.view.MainView
-import moe.tlaster.precompose.lifecycle.PreComposeActivity
-import moe.tlaster.precompose.lifecycle.setContent
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import com.arkivanov.decompose.defaultComponentContext
+import com.pasichnyi.cleanarchitecturekmm.MainView
 
 
-class MainActivity : PreComposeActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        setContent {
+//            MainView()
+//        }
+
         setContent {
-            MainView()
+            MaterialTheme {
+                Surface {
+                    MainView(context = defaultComponentContext())
+                }
+            }
         }
     }
 }

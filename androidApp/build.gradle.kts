@@ -43,4 +43,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation ("io.insert-koin:koin-android:$koinAndroidVersion")
+    implementation("com.arkivanov.decompose:extensions-compose-jetpack:1.0.0")
+    implementation("com.arkivanov.decompose:extensions-android:1.0.0")
+    implementation("com.arkivanov.decompose:extensions-compose-jetbrains:1.0.0-compose-experimental")
+    implementation("com.arkivanov.decompose:decompose:1.0.0-compose-experimental")
 }
