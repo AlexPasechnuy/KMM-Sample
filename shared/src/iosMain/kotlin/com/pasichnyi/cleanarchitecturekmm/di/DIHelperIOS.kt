@@ -1,8 +1,8 @@
 package com.pasichnyi.cleanarchitecturekmm.di
 
 import com.pasichnyi.cleanarchitecturekmm.data.repository.ArticlesRepositoryImpl
-import com.pasichnyi.cleanarchitecturekmm.domain.interactor.FetchArticlesInteractor
-import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetLocalArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.articles.FetchArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.articles.GetLocalArticlesInteractor
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

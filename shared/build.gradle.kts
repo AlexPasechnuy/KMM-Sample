@@ -47,6 +47,7 @@ kotlin {
                 api("moe.tlaster:precompose:$precomposeVersion")
                 implementation("com.arkivanov.decompose:extensions-compose-jetbrains:1.0.0-beta-04-native-compose")
                 implementation("com.arkivanov.decompose:decompose:1.0.0-beta-04-native-compose")
+                implementation("io.github.softartdev:material-theme-prefs:0.5.1")
             }
         }
         val commonTest by getting {

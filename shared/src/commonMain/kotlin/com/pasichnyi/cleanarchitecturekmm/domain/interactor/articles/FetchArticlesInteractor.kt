@@ -1,4 +1,4 @@
-package com.pasichnyi.cleanarchitecturekmm.domain.interactor
+package com.pasichnyi.cleanarchitecturekmm.domain.interactor.articles
 
 import com.pasichnyi.cleanarchitecturekmm.data.repository.ArticlesRepository
 
