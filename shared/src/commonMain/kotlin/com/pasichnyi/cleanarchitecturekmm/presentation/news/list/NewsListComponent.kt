@@ -4,8 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
-import com.pasichnyi.cleanarchitecturekmm.domain.interactor.FetchArticlesInteractor
-import com.pasichnyi.cleanarchitecturekmm.domain.interactor.GetLocalArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.articles.FetchArticlesInteractor
+import com.pasichnyi.cleanarchitecturekmm.domain.interactor.articles.GetLocalArticlesInteractor
 import com.pasichnyi.cleanarchitecturekmm.exception.OfflineException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

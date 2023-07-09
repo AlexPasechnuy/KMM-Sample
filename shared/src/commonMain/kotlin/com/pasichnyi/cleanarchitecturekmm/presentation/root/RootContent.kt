@@ -41,6 +41,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.scal
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.pasichnyi.cleanarchitecturekmm.presentation.news.newsRoot.NewsContent
 import com.pasichnyi.cleanarchitecturekmm.presentation.settings.SettingsContent
+import com.softartdev.themepref.PreferableMaterialTheme
 import kotlinx.coroutines.launch
 
 internal val darkmodeState = mutableStateOf(false)
@@ -53,84 +54,85 @@ internal val DarkMode = compositionLocalOf { darkmodeState }
 internal fun NewRootContent(component: RootComponent, modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
-    Scaffold(
-        topBar = {
-            Box(modifier = Modifier.background(MaterialTheme.colors.primary)) {
-                TopAppBar(
-                    modifier = Modifier.padding(
-                        start = SafeArea.current.value.calculateStartPadding(LayoutDirection.Ltr),
-                        top = SafeArea.current.value.calculateTopPadding(),
-                        end = SafeArea.current.value.calculateEndPadding(LayoutDirection.Ltr)
-                    ),
-                    title = { Text("Current route") },
-                    navigationIcon = {
-                        Icon(
-                            Icons.Default.Menu,
-                            "test",
+    PreferableMaterialTheme {
+        Scaffold(
+            topBar = {
+                Box(modifier = Modifier.background(MaterialTheme.colors.primary)) {
+                    TopAppBar(
+                        modifier = Modifier.padding(
+                            start = SafeArea.current.value.calculateStartPadding(LayoutDirection.Ltr),
+                            top = SafeArea.current.value.calculateTopPadding(),
+                            end = SafeArea.current.value.calculateEndPadding(LayoutDirection.Ltr)
+                        ),
+                        title = { Text("Current route") },
+                        navigationIcon = {
+                            Icon(
+                                Icons.Default.Menu,
+                                "test",
+                                modifier = Modifier.clickable {
+                                    scope.launch { scaffoldState.drawerState.open() }
+                                }
+                            )
+                        }
+                    )
+                }
+            },
+            drawerBackgroundColor = MaterialTheme.colors.background,
+            drawerContent = {
+                Column {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(70.dp)
+                            .background(
+                                brush = Brush.horizontalGradient(
+                                    listOf(
+                                        Color(0xFF966DE7),
+                                        Color(0xFF755CD4),
+                                        Color(0xFF4C48C1)
+                                    )
+                                )
+                            ),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = "Clear Architecture Compose MPP",
+                            style = MaterialTheme.typography.h5,
+                            color = Color.Red,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
+                    Column {
+                        ListItem(
+                            text = { Text("News") },
                             modifier = Modifier.clickable {
-                                scope.launch { scaffoldState.drawerState.open() }
+                                component.onNewsClick()
+                                scope.launch { scaffoldState.drawerState.close() }
+                            }
+                        )
+                        ListItem(
+                            text = { Text("Settings") },
+                            modifier = Modifier.clickable {
+                                component.onSettingsClick()
+                                scope.launch { scaffoldState.drawerState.close() }
                             }
                         )
                     }
-                )
-            }
-        },
-        drawerBackgroundColor = MaterialTheme.colors.background,
-        drawerContent = {
-            Column {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(70.dp)
-                        .background(
-                            brush = Brush.horizontalGradient(
-                                listOf(
-                                    Color(0xFF966DE7),
-                                    Color(0xFF755CD4),
-                                    Color(0xFF4C48C1)
-                                )
-                            )
-                        ),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Clear Architecture Compose MPP",
-                        style = MaterialTheme.typography.h5,
-                        color = Color.Red,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
                 }
-                Column {
-                    ListItem(
-                        text = { Text("News") },
-                        modifier = Modifier.clickable {
-                            component.onNewsClick()
-                            scope.launch { scaffoldState.drawerState.close() }
-                        }
-                    )
-                    ListItem(
-                        text = { Text("Settings") },
-                        modifier = Modifier.clickable {
-                            component.onSettingsClick()
-                            scope.launch { scaffoldState.drawerState.close() }
-                        }
-                    )
-                }
-            }
-        },
-        scaffoldState = scaffoldState
-    ) {
-        Children(
-            stack = component.stack,
-            modifier = modifier,
-            animation = stackAnimation(fade() + scale()),
+            },
+            scaffoldState = scaffoldState
         ) {
-            when (val child = it.instance) {
-                is RootComponent.Child.NewsChild -> NewsContent(component = child.component)
-                is RootComponent.Child.SettingsChild -> SettingsContent(component = child.component)
+            Children(
+                stack = component.stack,
+                modifier = modifier,
+                animation = stackAnimation(fade() + scale()),
+            ) {
+                when (val child = it.instance) {
+                    is RootComponent.Child.NewsChild -> NewsContent(component = child.component)
+                    is RootComponent.Child.SettingsChild -> SettingsContent(component = child.component)
+                }
             }
         }
     }
-
 
 }
