@@ -6,7 +6,6 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
@@ -15,10 +14,6 @@ import com.pasichnyi.cleanarchitecturekmm.presentation.news.details.ArticleDetai
 import com.pasichnyi.cleanarchitecturekmm.presentation.news.details.DefaultArticleDetailsComponent
 import com.pasichnyi.cleanarchitecturekmm.presentation.news.list.DefaultNewsListComponent
 import com.pasichnyi.cleanarchitecturekmm.presentation.news.list.NewsListComponent
-import com.pasichnyi.cleanarchitecturekmm.presentation.root.DefaultRootComponent
-import com.pasichnyi.cleanarchitecturekmm.presentation.root.RootComponent
-import com.pasichnyi.cleanarchitecturekmm.presentation.settings.DefaultSettingsComponent
-import com.pasichnyi.cleanarchitecturekmm.presentation.settings.SettingsComponent
 
 interface NewsComponent {
 
@@ -68,6 +63,7 @@ class DefaultNewsComponent(
                     config
                 )
             )
+
             is Config.List -> NewsComponent.Child.ListChild(listComponent(componentContext))
         }
 
