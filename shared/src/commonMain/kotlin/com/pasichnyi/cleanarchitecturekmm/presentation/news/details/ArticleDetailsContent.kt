@@ -14,11 +14,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pasichnyi.cleanarchitecturekmm.domain.entity.Article
-import com.pasichnyi.cleanarchitecturekmm.presentation.news.list.NewsListComponent
 import com.pasichnyi.cleanarchitecturekmm.presentation.widgets.AsyncImage
 
 @Composable
-internal fun ArticleDetailsContent(component: ArticleDetailsComponent, modifier: Modifier = Modifier) {
+internal fun ArticleDetailsContent(
+    component: ArticleDetailsComponent,
+    modifier: Modifier = Modifier
+) {
     ArticleDetails(component.models.value.article)
 }
 

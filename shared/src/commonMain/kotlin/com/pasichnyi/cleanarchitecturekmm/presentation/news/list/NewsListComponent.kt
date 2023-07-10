@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-// TODO("Add isOnline flag and visual representation of it")
 interface NewsListComponent {
 
     val model: Value<Model>
