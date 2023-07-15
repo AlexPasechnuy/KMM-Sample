@@ -7,13 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -30,6 +31,35 @@ import com.pasichnyi.cleanarchitecturekmm.presentation.widgets.AsyncImage
 @Composable
 internal fun NewsListContent(component: NewsListComponent, modifier: Modifier = Modifier) {
     val model by component.model.subscribeAsState()
+    when (model) {
+        is NewsListComponent.State.ArticlesList -> ArticlesScreen(
+            model as NewsListComponent.State.ArticlesList,
+            component,
+            modifier
+        )
+
+        NewsListComponent.State.Loading -> LoadingArticlesScreen()
+    }
+}
+
+@Composable
+internal fun LoadingArticlesScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator()
+        Text("Loading")
+    }
+}
+
+@Composable
+internal fun ArticlesScreen(
+    model: NewsListComponent.State.ArticlesList,
+    component: NewsListComponent,
+    modifier: Modifier = Modifier
+) {
     if (!model.isOnline) {
         OfflineWarning(component::refresh)
     }
@@ -93,7 +123,7 @@ private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
             article.urlToImage?.let {
                 AsyncImage(
                     url = it,
-                    modifier = Modifier.fillMaxHeight()
+                    modifier = Modifier.width(144.dp)
                 )
             }
 
@@ -105,29 +135,29 @@ private fun ArticleCard(article: Article, onItemClick: (Article) -> Unit) {
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                Row {
-                    Text(
-                        text = article.author ?: "Unknown author",
-                        color = MaterialTheme.colors.secondaryVariant,
-                        style = MaterialTheme.typography.subtitle2
-                    )
-                    Spacer(Modifier.weight(1f))
-                    Text(
-                        text = article.publishedAt ?: "Publish time unknown",
-                        color = MaterialTheme.colors.secondaryVariant,
-                        style = MaterialTheme.typography.subtitle2
-                    )
-                }
+                Text(
+                    text = article.author ?: "Unknown author",
+                    color = MaterialTheme.colors.secondaryVariant,
+                    style = MaterialTheme.typography.subtitle2
+                )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = article.content ?: "Unknown text",
-                    modifier = Modifier.padding(all = 4.dp),
-                    style = MaterialTheme.typography.body2
-                )
+                        text = article.title,
+                        modifier = Modifier.padding(all = 4.dp).weight(1.0f),
+                        style = MaterialTheme.typography.body2
+                    )
 
                 Spacer(modifier = Modifier.height(4.dp))
+
+                article.publishedAt?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colors.secondaryVariant,
+                        style = MaterialTheme.typography.subtitle2
+                    )
+                }
             }
         }
     }

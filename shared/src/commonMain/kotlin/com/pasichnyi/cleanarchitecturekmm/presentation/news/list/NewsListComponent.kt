@@ -15,16 +15,22 @@ import org.koin.core.component.inject
 
 interface NewsListComponent {
 
-    val model: Value<Model>
+    val model: Value<State>
 
     fun onArticleClicked(article: Article)
 
     fun refresh()
 
-    data class Model(
-        val articles: List<Article>,
-        val isOnline: Boolean,
-    )
+    sealed class State{
+
+        object Loading : State()
+
+        data class ArticlesList(
+            val articles: List<Article>,
+            val isOnline: Boolean,
+        ) : State()
+    }
+
 }
 
 class DefaultNewsListComponent(
@@ -36,12 +42,9 @@ class DefaultNewsListComponent(
     private val getLocalArticlesInteractor: GetLocalArticlesInteractor by inject()
 
     // TODO("Add loading state")
-    override val model: MutableValue<NewsListComponent.Model> =
+    override val model: MutableValue<NewsListComponent.State> =
         MutableValue(
-            NewsListComponent.Model(
-                articles = emptyList(),
-                isOnline = false,
-            )
+            NewsListComponent.State.Loading
         )
 
     init {
@@ -57,7 +60,7 @@ class DefaultNewsListComponent(
             } catch (ex: OfflineException) {
                 false
             }
-            model.value = NewsListComponent.Model(
+            model.value = NewsListComponent.State.ArticlesList(
                 articles = getLocalArticlesInteractor(),
                 isOnline = isOnline
             )
