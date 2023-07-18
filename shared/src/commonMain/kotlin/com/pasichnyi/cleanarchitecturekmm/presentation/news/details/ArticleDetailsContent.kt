@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,6 +57,14 @@ internal fun ArticleDetails(article: Article) {
                 fontSize = 20.sp,
             )
             Spacer(modifier = Modifier.height(4.dp))
+            val uriHandler = LocalUriHandler.current
+            Button(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                content = { Text("Open original article") },
+                onClick = {
+                    uriHandler.openUri(article.url)
+                }
+            )
         }
     }
 }

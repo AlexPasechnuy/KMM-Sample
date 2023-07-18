@@ -64,7 +64,7 @@ internal fun NewRootContent(component: RootComponent, modifier: Modifier = Modif
                             top = SafeArea.current.value.calculateTopPadding(),
                             end = SafeArea.current.value.calculateEndPadding(LayoutDirection.Ltr)
                         ),
-                        title = { Text("Current route") },
+                        title = { Text("CleanArchitectureKMM") },
                         navigationIcon = {
                             Icon(
                                 Icons.Default.Menu,
